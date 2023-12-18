@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/styles.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <title>Form Page</title>
+    <!-- Add Thymeleaf layout dialect if needed -->
+    <!-- <th:block th:include="layout :: head"></th:block> -->
+    <style>
+                body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-image: url('https://wallpapers.com/images/hd/grocery-store-graphic-image-vicql72qbo8raeis.jpg'); /* Add a background image if needed */
+    background-size: cover;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.form-container {
+    background-color: rgba(255, 255, 255, 0.8); /* Transparent white background */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Shadow effect */
+    text-align: center;
+    width: 400px; /* Increased width */
+    margin: 0 auto; /* Center the form horizontally */
+}
+
+.form-group label {
+    width: 100%; /* Label width set to 100% to fit available space */
+    text-align: right;
+    margin-right: 10px;
+}
+
+.form-group input {
+    width: 100%; /* Input width set to 100% to fit available space */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+/* ... (previous CSS code) */
+.form-group {
+    margin: 10px 0;
+    display: flex;
+    align-items: center;
+}
+
+
+
+
+button {
+    background-color: #1E4069;
+    color: #fff;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+button:hover {
+    background-color: #294C8E;
+}
+
+.navbar {
+    background-color: #294C8E;
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+}
+
+.nav-links {
+    list-style: none;
+    padding: 0;
+}
+
+.nav-links li {
+    display: inline;
+    margin-right: 20px;
+
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+}
+
+    </style>
+</head>
+<body>
+
+<div class="form-container">
+    <nav class="navbar">
+        <div class="logo"><img src="https://thumbs.dreamstime.com/z/online-shop-store-logo-logotype-business-isolated-vector-illustration-97663993.jpg" width="50" height="50" alt="Logo"></div>
+        <ul class="nav-links">
+            <li><a th:href="@{/Dashboard}" class="active">Home</a></li>
+        </ul>
+    </nav>
+    <!-- Include Thymeleaf fragments if needed -->
+    <!-- <th:replace th:fragment="navbar" th:include="navbar :: navbar"></th:replace> -->
+
+
+    <h1>SIGN UP</h1>
+
+
+    <form  th:action="@{/Manager/processForm}" th:object="${user}" method="post">
+
+        <div class="form-group">
+            <label for="firstName">First Name</label>
+            <input type="text" th:field="*{firstName}" class="form-control"
+                   placeholder="First Name" id="firstName" name="firstName" >
+            <small th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}" class="text-danger"></small>
+        </div>
+
+        <div class="form-group">
+            <label for="lastName">Last Name</label>
+            <input type="text" th:field="*{lastName}" class="form-control"
+                   placeholder="Last Name" id="lastName" name="lastName" >
+            <small th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}" class="text-danger"></small>
+        </div>
+
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" th:field="*{username}" class="form-control"
+                   placeholder="Username" id="username" name="username" >
+            <small th:if="${#fields.hasErrors('username')}" th:errors="*{username}" class="text-danger"></small>
+        </div>
+
+        <div class="form-group">
+            <label for="formRole">Role</label>
+            <select th:field="*{formRole}" class="form-control" id="formRole" >
+                <option value="" selected>Select Role</option>
+                <option value="ROLE_BUYER">Buyer</option>
+                <option value="ROLE_VENDOR">Vendor</option>
+                <option value="ROLE_OPERATIONS_MANAGER">Operations Manager</option>
+            </select>
+            <small th:if="${#fields.hasErrors('formRole')}" th:errors="*{formRole}" class="text-danger"></small>
+        </div>
+
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="text" th:field="*{email}" class="form-control"
+                   placeholder="Email" id="email" name="email" >
+            <small th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="text-danger"></small>
+        </div>
+
+        <div class="form-group">
+            <label for="phoneNumber">Phone Number</label>
+            <input type="text" th:field="*{phoneNumber}" class="form-control"
+                   placeholder="Phone Number" id="phoneNumber" name="phoneNumber" >
+            <small th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}" class="text-danger"></small>
+        </div>
+
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" th:field="*{password}" class="form-control"
+                   placeholder="Password" id="password" name="password" >
+            <small th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="text-danger"></small>
+        </div>
+
+        <div class="form-group">
+            <label for="cpassword">Confirm Password</label>
+            <input type="password" class="form-control"
+                   placeholder="Confirm Password" id="cpassword" name="cpassword">
+        </div>
+        <button type="submit" name="action">Submit</button>
+    </form>
+</div>
+</body>
+</html>

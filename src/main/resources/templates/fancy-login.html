@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" th:href="@{/styles.css}">
+	<style>
+        body {
+            background-image: url('https://wallpapers.com/images/hd/grocery-store-graphic-image-vicql72qbo8raeis.jpg');
+            background-size: cover;
+            background-position: center;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .form-container {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            width: 400px;
+            margin: 0 auto;
+        }
+
+        .form-group label {
+            width: 100%;
+            text-align: right;
+            margin-right: 10px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group {
+            margin: 10px 0;
+            display: flex;
+            align-items: center;
+        }
+
+        button {
+            background-color: #1E4069;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        button:hover {
+            background-color: #294C8E;
+        }
+
+        header {
+            background-color: #333;
+            height: 50px;
+            padding: 10px;
+        }
+
+.navbar {
+    background-color: #294C8E;
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+}
+
+.nav-links {
+    list-style: none;
+    padding: 0;
+}
+
+.nav-links li {
+    display: inline;
+    margin-right: 20px;
+
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+}
+    </style>
+</head>
+
+<body>
+
+
+
+<div class="form-container">
+	<nav class="navbar">
+		<div class="logo"><img src="https://thumbs.dreamstime.com/z/online-shop-store-logo-logotype-business-isolated-vector-illustration-97663993.jpg" width="50" height="50" alt="Logo"></div>
+		<ul class="nav-links">
+			<li><a th:href="@{/Dashboard}" class="active">Home</a></li>
+		</ul>
+	</nav>
+	<h1>SIGN IN</h1>
+
+	<form th:action="@{/authenticateTheUser}" method="POST">
+		<div th:if="${param.error}" class="alert alert-danger">
+			Invalid username and password.
+		</div>
+
+		<div th:if="${param.logout}" class="alert alert-success">
+			You have been logged out.
+		</div>
+
+		<div class="form-group">
+			<label for="username">Email</label>
+			<input type="text" id="username" name="username" class="form-control" placeholder="Email" required>
+		</div>
+
+		<div class="form-group">
+			<label for="password">Password</label>
+			<input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
+		</div>
+
+		<div class="form-group">
+			<button type="submit">Login</button>
+		</div>
+	</form>
+
+	<div class="text-center mt-2">
+		<a th:href="@{/Manager/loadForgotPassword}" class="text-decoration-none fs-5">Forget Password</a>
+	</div>
+
+	<div class="card-footer">
+		<a th:href="@{/Manager/show}">Register New User</a>
+	</div>
+</div>
+</body>
+
+</html>

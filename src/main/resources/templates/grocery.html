@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/styles.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <title>GROCERY PORTAL FORM</title>
+    <
+    <!-- Add Thymeleaf layout dialect if needed -->
+    <!-- <th:block th:include="layout :: head"></th:block> -->
+    <style>
+                body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-image: url('https://wallpapers.com/images/hd/grocery-store-graphic-image-vicql72qbo8raeis.jpg'); /* Add a background image if needed */
+    background-size: cover;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.form-container {
+    background-color: rgba(255, 255, 255, 0.8); /* Transparent white background */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Shadow effect */
+    text-align: center;
+    width: 400px; /* Increased width */
+    margin: 0 auto; /* Center the form horizontally */
+}
+
+.form-group label {
+    width: 100%; /* Label width set to 100% to fit available space */
+    text-align: right;
+    margin-right: 10px;
+}
+
+.form-group input {
+    width: 100%; /* Input width set to 100% to fit available space */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+/* ... (previous CSS code) */
+.form-group {
+    margin: 10px 0;
+    display: flex;
+    align-items: center;
+}
+
+
+
+
+button {
+    background-color: #1E4069;
+    color: #fff;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+button:hover {
+    background-color: #294C8E;
+}
+
+.navbar {
+    background-color: #294C8E;
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+}
+
+.nav-links {
+    list-style: none;
+    padding: 0;
+}
+
+.nav-links li {
+    display: inline;
+    margin-right: 20px;
+
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+}
+
+    </style>
+</head>
+<body>
+<div class="form-container">
+    <nav class="navbar">
+        <div class="logo"><img src="https://thumbs.dreamstime.com/z/online-shop-store-logo-logotype-business-isolated-vector-illustration-97663993.jpg" width="50" height="50" alt="Logo"></div>
+        <ul class="nav-links">
+            <li><a th:href="@{/Dashboard}" class="active">Home</a></li>
+        </ul>
+    </nav>
+    <!-- Include Thymeleaf fragments if needed -->
+    <!-- <th:replace th:fragment="navbar" th:include="navbar :: navbar"></th:replace> -->
+
+    <h1>ADDING GROCERY STOCK</h1>
+
+
+    <form  action="#" th:action="@{/groceries/save}" th:object="${grocery}" method="post" enctype="multipart/form-data">
+        <input type="hidden" th:field="*{id}">
+        <!--        <input type="hidden" name="userId" th:value="${userId}">-->
+        <input type="hidden" name="AuthId" th:value="${AuthId ?: 1}" />
+
+        <div class="form-group">
+            <label for="name">Item Name</label>
+            <input type="text" id="name" name="name" th:field="*{name}" placeholder="Enter Item Name" required/>
+        </div>
+
+        <div class="form-group">
+            <label for="price">Price</label>
+            <input type="number" id="price" name="price" th:field="*{price}" placeholder="Enter Price" required/>
+
+        </div>
+        <div class="form-group">
+            <label for="description">Item Description</label>
+            <textarea rows="4" cols="20" id="description" name="description" th:field="*{description}" placeholder="Enter Item Description" required></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="quantityInStock">Quantity in stock</label>
+            <input type="text" th:field="*{quantityInStock}" class="form-control"
+                   placeholder="Quantity" id="quantityInStock" name="quantityInStock">
+        </div>
+
+        <div class="form-group">
+            <label for="category">Categories</label>
+            <select name="category" id="category" th:field="*{category}" required>
+                <option value="">Select Category</option>
+                <option value="Fresh Produce">Fresh Produce</option>
+                <option value="Dairy and Eggs">Dairy and Eggs</option>
+                <option value="Meat and Seafood">Meat and Seafood</option>
+                <option value="Beverages">Beverages</option>
+                <option value="Snacks">Snacks</option>
+                <option value="Baby and Child Care">Baby and Child Care</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="manufactureDate">Manufacture Date</label>
+            <input type="date" th:field="*{manufactureDate}" class="form-control"
+                    id="manufactureDate" name="manufactureDate">
+        </div>
+        <div class="form-group">
+            <label for="expiryDate">Expiry Date</label>
+            <input type="date" th:field="*{expiryDate}"class="form-control"
+                    id="expiryDate" name="expiryDate">
+
+        </div>
+
+        <div class="form-group">
+
+            <label for="report">Ingredients</label>
+            <input type="file" id="report" name="report" accept="application/pdf" required class="form-control"/>
+        </div>
+        <div class="form-group">
+            <label style="background-color:black;
+                margin:10px 10px; color:white;">Add Item Image</label>
+            <input type="file"
+                   name="pic" id="pic" accept=".jpg,.jpeg,.png" style="background-color:black; margin-bottom:20px;" class="form-control">
+
+        </div>
+        <button type="submit" name="action">Submit</button>
+    </form>
+</div>
+</body>
+</html>
